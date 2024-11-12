@@ -8,6 +8,10 @@ import { useSelector } from 'react-redux';
 import logo from '../pictures/smallLogo.png'
 function Navbar() {
     const navigate = useNavigate();
+    const handleStartJourney = () => {
+        navigate("/begin-travel"); 
+    };
+
     return (
         <>
         <br></br>
@@ -16,7 +20,14 @@ function Navbar() {
             <button style={{width: '200px', height: '80px' }}>פרופיל אישי</button>
             <button style={{width: '200px', height: '80px' }}>הסטוריה</button>
             <button style={{width: '200px', height: '80px' }}>אודותינו</button>
-            <button style={{width: '200px', height: '80px' }}>לתחילת נסיעה</button>
+            <button style={{ width: '200px', height: '80px' }}>אודותינו</button>
+            {/* כפתור תחילת נסיעה */}
+            <button
+                style={{ width: '200px', height: '80px' }}
+                onClick={handleStartJourney} // קישור לפונקציית הניווט
+            >
+                תחילת נסיעה
+            </button>
             <button style={{width: '200px', height: '80px' }}>לסיום נסיעה</button>
             <button style={{width: '200px', height: '80px' }}>לאישור</button>
 
