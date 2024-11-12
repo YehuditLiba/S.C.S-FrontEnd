@@ -14,26 +14,32 @@ import EndTravel from './Shared-Cars-Service/EndTravel';
 import Profile from './Shared-Cars-Service/Profile';
 import History from './Shared-Cars-Service/History';
 import Payment from './Shared-Cars-Service/Payment'
+import { UserProvider } from '../src/Shared-Cars-Service/Context/UserContext';
 function App() {
   return (
     <div style={{ backgroundColor: 'black' }}>
       {/* <Navbar></Navbar> */}
       {/* <LogIn></LogIn> */}
+      
       <BrowserRouter>
+      <UserProvider>
         <Routes>
           <Route path="/" element={<LogIn />}></Route>
           <Route path="/LogIn" element={<LogIn />}></Route>
           <Route path="/SignUp" element={<SignUp />}></Route>
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/About" element={<About />}></Route>
-          <Route path="/BeginTravel" element={<BeginTravel />}></Route>
+          <Route path="/begin-travel" element={<BeginTravel/>}></Route> 
           <Route path="/EndTravel" element={<EndTravel />}></Route>
           <Route path="/Profile" element={<Profile />}></Route>
           <Route path="/History" element={<History />}></Route>
           <Route path="/Payment" element={<Payment />}></Route>
 
         </Routes>
+          </UserProvider>
       </BrowserRouter>
+     
+
       <br></br><br></br>
       <br></br><br></br>
       <img src={gif} alt="Image" style={{ width: '25%', height: '200px' }} /><img src={gif} alt="Image" style={{ width: '25%', height: '200px' }} /><img src={gif} alt="Image" style={{ width: '25%', height: '200px' }} /><img src={gif} alt="Image" style={{ width: '25%', height: '200px' }} />
