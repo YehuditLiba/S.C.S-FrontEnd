@@ -7,7 +7,7 @@ function About() {
             <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                 {/* <h4 class="mb-4">אז מה זה בעצם shared-cars-service ואיך משתמשים בו?</h4> */}
                 <p class="small mb-0" style={{ "text-align": "center" }}>
-                    <h2>                  אז מה זה בעצם shared-cars-service ואיך משתמשים בו?
+                    <h2>                 ?   ואיך משתמשים בו shared-cars-service אז מה זה בעצם
                     </h2>
                     <br></br>
                     קודם כל נרשמים-

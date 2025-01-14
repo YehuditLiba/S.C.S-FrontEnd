@@ -1,21 +1,90 @@
+/* גרדיאנט כללי של הרקע */
 .gradient-custom-2 {
-    /* Opera 11.10-12.0 */
-    background:#17dfe2;
-    /* background: linear-gradient(to right, #17dfe2,rgb(5, 111, 83), rgb(1, 49, 37)); */
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #f4f2f1, #17dfe2, rgb(8, 222, 165), #04db53);
-
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient (to right, #f4f2f1, #17dfe2, rgb(8, 222, 165), #04db53);
+    background: linear-gradient(to right, #f4f2f1, #17dfe2, rgb(8, 222, 165), #04db53);
+    background-size: 300% 300%;
+    animation: gradient-animation 5s ease-in-out infinite;
 }
 
+/* אנימציה של מעבר צבע בגרדיאנט */
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* עיצוב שדות קלט עם מעבר צבע עדין */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border-color: #17dfe2;
+    /* צבע זוהר כשיש פוקוס */
+    background-color: #e0f7f1;
+    /* צבע רקע עדין כשיש פוקוס */
+}
+
+/* עיצוב כפתורים */
+button {
+    background-color: #17dfe2;
+    /* צבע רקע לכפתור */
+    color: white;
+    /* צבע טקסט */
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: 2px solid #17dfe2;
+    /* מסגרת דקה של אותו צבע */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: white;
+    color: #17dfe2;
+    /* שינוי צבע טקסט לכחול בהובר */
+    border-color: #17dfe2;
+    /* שמירה על המסגרת כשהכפתור מוחזר */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* הוספת צל עבור כפתור בעת הובר */
+}
+
+/* עיצוב עבור טקסטים או תוויות */
+label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* עיצוב בעת רספונסיביות במסכים קטנים יותר */
 @media (min-width: 768px) {
     .gradient-form {
         height: 100vh !important;
     }
 }
 
+/* עיצוב נוסף למסכים גדולים יותר */
 @media (min-width: 769px) {
     .gradient-custom-2 {
         border-top-right-radius: .3rem;

@@ -1,0 +1,82 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+    /* שים את הלוגו למעלה */
+    align-items: center;
+    /* מיישר את כל התוכן למרכז */
+    background-color: black;
+    padding: 40px 20px;
+    /* ריווח סביב ה-navbar */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+    /* שמור על פרופורציות נכונות */
+    margin-bottom: 10px;
+    /* ריווח קטן בין הלוגו לכפתורים */
+}
+
+.nav-buttons {
+    display: flex;
+    flex-direction: row;
+    /* הצג את הכפתורים בשורה (מימין לשמאל) */
+    justify-content: flex-start;
+    /* הצג את הכפתורים מימין לשמאל */
+    gap: 15px;
+    /* ריווח אחיד בין הכפתורים */
+    width: 100%;
+    max-width: 1000px;
+    /* שמור על רוחב מקסימלי */
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #40E0D0;
+    /* צבע טורקיז */
+    color: white;
+    width: 180px;
+    height: 80px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    /* קצוות עגולים */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    /* אפקטים על שינוי גודל והצללה */
+}
+
+.nav-button:hover {
+    transform: translateY(-5px);
+    /* אפקט התרוממות */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    /* הצללה עדינה */
+}
+
+.nav-button .icon {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.nav-button.large {
+    width: 200px;
+    /* גודל יותר גדול לכפתורים "תחילת נסיעה" ו-"סיום נסיעה" */
+    height: 90px;
+    font-size: 18px;
+    background-color: #007BFF;
+    /* צבע כחול בולט יותר */
+}
+
+.nav-button.large:hover {
+    background-color: #0056b3;
+    /* שינוי צבע במהלך ריחוף */
+}
+
+.nav-button:hover .icon {
+    transform: scale(1.2);
+    /* הגדלת האייקון במהלך ריחוף */
+}

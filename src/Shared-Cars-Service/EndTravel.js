@@ -1,72 +1,120 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import Navbar from "./Navbar";
-import './style.css';
-
+import axios from 'axios';
+import { useUser } from '../Shared-Cars-Service/Context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import "../Shared-Cars-Service/Style/EndTravel.css";
 
 function EndTravel() {
-    const currentUserFirstName = JSON.parse(sessionStorage.getItem('currentUser'))['name'].split(' ')[0];
-    const [numOfRentalHours, setNumOfRentalHours] = useState();
-    const [city, setCity] = useState();
-    const [neighborhood, setNeighborhood] = useState();
-    const [street, setStreet] = useState();
-    const [homeNum, setHomeNum] = useState();
+    const { currentUser } = useUser();
+    const currentUserFirstName = currentUser ? currentUser.name.split(' ')[0] : '';
+
+    const [city, setCity] = useState('');
+    const [neighborhood, setNeighborhood] = useState('');
+    const [street, setStreet] = useState('');
+    const [coordinates, setCoordinates] = useState(null);
+    const [locationError, setLocationError] = useState('');
+    const [station, setStation] = useState(null);
     const [state, setState] = useState(1);
-    const navigate = useNavigate();
-    const endTravel = (numOfRentalHours, homeNum, street, neighborhood, city) => {
-        // fetch(`http://localhost:5073/api/Station/${numOfRentalHours}?num=${homeNum}&street=${street}&neighborhood=${neighborhood}&city=${city}`)
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         console.log("getting successfully" + data);
 
-        //     })
+    const navigate = useNavigate(); // נוויגציה לעמוד התשלום
+
+    const API_KEY = "AIzaSyBFwHxGY47K0J1ECt99_TZA7aVO62ztUp0";
+
+    async function fetchStationData(latitude, longitude) {
+        try {
+            const response = await axios.post('http://localhost:5073/api/Station/GetLucrativeStation', {
+                x: latitude,
+                y: longitude,
+                city,
+                neighborhood,
+                street,
+                carNames: ["string"]
+            });
+            setStation(response.data);
+            setState(2);
+        } catch (error) {
+            console.error("Error fetching station:", error);
+            setLocationError('שגיאה באיתור תחנה');
+        }
     }
+
+    function handleManualLocationSubmit() {
+        setLocationError('');
+        if (!city || !neighborhood || !street) {
+            setLocationError('אנא מלא את כל השדות');
+            return;
+        }
+
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${city},${neighborhood},${street}&key=${API_KEY}`)
+            .then(response => {
+                if (response.data.results.length > 0) {
+                    const location = response.data.results[0].geometry.location;
+                    fetchStationData(location.lat, location.lng);
+                    setCoordinates({ lat: location.lat, lng: location.lng });
+                } else {
+                    setLocationError('לא נמצאה כתובת מתאימה');
+                }
+            })
+            .catch(error => setLocationError('שגיאה באיתור הכתובת'));
+    }
+
+    // פונקציה שמעבירה לעמוד התשלום
+    function handleConfirmStation() {
+        navigate('/payment'); // נוויגציה לעמוד תשלום
+    }
+
     return (
-        <>
-        <Navbar />
-        <h2>החניה הריווחית שלך ממוקמת ב-</h2>
-        <h3>מנחת יצחק 27</h3>
-        <h3>התחנה היא מרחק 0.37 ק"מ מהיעד שלך - מרחק הליכה סביר</h3>
-        <h3>בנסיעה זו חסכת - 48 ש"ח</h3>
-        <button style={{width:'100px'}}>לתפיסת החניה</button>
-        <h3>בעת הגעה לחניה יש ללחוץ אישור בתפריט הראשי</h3>
-        <h3>שים לב במידה ולא תאשר הגעה לחניה בשעתיים הקרובות מתבטלת תפיסת החניה ועלות השכירות ממשיכה לעלות</h3>
+        <div className="end-travel-container">
+            <Navbar />
+            {locationError && <p className="error-message">{locationError}</p>}
+            {state === 1 && (
+                <>
+                    <h3>שלום {currentUserFirstName}, באיזה מיקום אתה רוצה להחזיר את הרכב?</h3>
+                    <input
+                        type="text"
+                        placeholder="עיר"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="שכונה"
+                        value={neighborhood}
+                        onChange={(e) => setNeighborhood(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="רחוב"
+                        value={street}
+                        onChange={(e) => setStreet(e.target.value)}
+                    />
+                    <button onClick={handleManualLocationSubmit}>חפש תחנה קרובה</button>
+                </>
+            )}
+            {state === 2 && station && (
+                <>
+                    <h1>התחנה הקרובה ביותר להחזרת הרכב נמצאת ב:</h1>
+                    <h3>{station.city}, {station.neighborhood}, {station.street}</h3>
+                    <h4>תחנה עם חניות פנויות להחזרה</h4>
 
-        </>
-        // <>
-        //     <Navbar />
-        //     {/* <h1>שלום {currentUserFirstName} </h1> */}
-        //     <h3>שלום דסי:)</h3>
-        //     {/* state 1 - when user begin travel */}
-        //     {state == 1 &&
-        //         <>
-        //             <h3>מהי נקודת היעד שלך?</h3><br></br>
-        //             <div>
-        //                 <label for="city">עיר</label>
-        //                 <input type={"text"} id="city" name="city" onChange={(e) => setCity(e.target.value)} required />
-        //                 <label for="neighborhood">שכונה</label>
-        //                 <input type={"text"} id="neighborhood" name="neighborhood" onChange={(e) => setNeighborhood(e.target.value)} required />
-        //                 <label for="street">רחוב</label>
-        //                 <input type={"text"} id="street" name="street" onChange={(e) => setStreet(e.target.value)} required />
-        //                 <label for="homeNum">מספר בנין</label>
-        //                 <input type={"number"} id="homeNum" name="homeNum" onChange={(e) => setHomeNum(e.target.value)} required />
-        //             </div>
-        //             {/* <label for="numOfRentalHours">לכמה שעות שכרת את הרכב ? </label><br></br> */}
-        //             {/* <input type={"number"} id="numOfRentalHours" onChange={(e) => setNumOfRentalHours(e.target.value)} required /> */}
-        //             <br></br>
-        //             <button style={{width:'100px'}} onClick={() => endTravel(numOfRentalHours, homeNum, street, neighborhood, city)}>למציאת תחנה ריווחית</button>
-        //         </>
-        //     }
-        //     {/* state 2 - when user would get the informtion about the nearest station */}
-        //     {/* {(state == 2 && nearestStation != null) &&
-        //         <>
-        //             <h1>הרכב הפנוי הקרוב אליך נמצא ב:</h1>
-        //             <h3>{nearestStation.city}, {nearestStation.neighborhood}, {nearestStation.street} {nearestStation.number}</h3>
-        //             <button onClick={changeCarInSationMode}>לאישור לקיחת הרכב לחץ כאן</button>
-        //         </>
-        //     } */}
-        // </>
-    )
-
+                    {coordinates && (
+                        <LoadScript googleMapsApiKey={API_KEY}>
+                            <GoogleMap
+                                mapContainerClassName="google-map-container"
+                                center={coordinates}
+                                zoom={15}
+                            >
+                                <Marker position={coordinates} />
+                            </GoogleMap>
+                        </LoadScript>
+                    )}
+                    <button onClick={handleConfirmStation}>אישור החזרת רכב</button>
+                </>
+            )}
+        </div>
+    );
 }
+
 export default EndTravel;
