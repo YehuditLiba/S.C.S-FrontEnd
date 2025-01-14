@@ -1,0 +1,92 @@
+/* עיצוב טופס */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    /* ריווח קטן בין השדות */
+    padding: 15px;
+    width: 100%;
+    max-width: 400px;
+    /* רוחב מקסימלי */
+    margin: auto;
+    /* מרכז את הטופס */
+}
+
+/* עיצוב כפתור */
+button {
+    background-color: #40E0D0;
+    /* צבע טורקיז לכפתור */
+    color: white;
+    /* צבע לבן לכתב בכפתור */
+    padding: 12px 24px;
+    /* ריווח פנימי נרחב יותר */
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #40E0D0;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    /* כפתור בגודל מלא */
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* עיצוב אייקונים בתוך כפתור */
+button i {
+    color: #ffffff;
+    /* אייקונים בהירים */
+    margin-right: 8px;
+    /* ריווח קטן בין האייקון לטקסט */
+}
+
+/* כאשר הכפתור במעבר */
+button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* עיצוב שדות הקלט */
+input {
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #40E0D0;
+    border-radius: 8px;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    margin-bottom: 8px;
+    transition: border 0.3s ease;
+}
+
+/* שינוי צבע הגבולות כשיש אינטרקציה */
+input:focus {
+    border-color: #40E0D0;
+    outline: none;
+}
+
+/* עיצוב טופס שדות */
+input[type="number"],
+input[type="month"] {
+    max-width: 350px;
+    /* הגבלת רוחב הקלטים */
+}
+
+/* עיצוב כותרות ותגיות */
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    /* ריווח תחתון */
+    color: white;
+    font-weight: bold;
+}
+
+/* סגנון לאות הודעה של סיום תשלום */
+h3 {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}

@@ -1,0 +1,56 @@
+/* הגדרות כלליות */
+.end-travel-container {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* ממקם את כל התוכן במרכז */
+    justify-content: center;
+}
+
+/* שדות הקלט */
+input {
+    width: 100%;
+    /* רוחב של 100% מתוך הקונטיינר */
+    max-width: 400px;
+    /* גודל מקסימלי של 400px */
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+}
+
+/* כפתור */
+button {
+    background-color: #40E0D0;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    /* רוחב של 100% מתוך הקונטיינר */
+    max-width: 400px;
+    /* גודל מקסימלי של 400px */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* הגדרת רוחב המפה */
+.google-map-container {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    margin-top: 20px;
+}

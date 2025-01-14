@@ -1,27 +1,36 @@
+import React, { useState } from 'react';
 import Navbar from "./Navbar";
+import '../Shared-Cars-Service/Style/Payment.css';
 
 export default function Payment() {
+    const [paymentComplete, setPaymentComplete] = useState(false);
+
+    const handlePayment = () => {
+        setPaymentComplete(true);
+    };
 
     return (
-        // <>
-        //     <Navbar></Navbar>
-        //     <br></br><br></br>
-        //     <form>
-        //         <label>מספר כרטיס</label><br />
-        //         <input type={'number'}></input><br />
-        //         <label>תוקף</label><br />
-        //         <input type={'month'}></input><br />
-        //         <label>שלוש ספרות בגב כרטיס</label><br />
-        //         <input type={'number'}></input><br /><br />
-        //         <input style={{backgroundColor:'aqua'}}type={'button'} value={'לתשלום סופי'}></input>
-        //         {/* <input style={{backgroundColor:'aqua'}}type={'button'} value={'לתשלום מקדמה'}></input> */}
-        //         {/* <h3>שים לב. לאחר תשלום המקדמה תקבל לכתובת המייל שלך קוד לפתיחת הרכב</h3> */}
-        //     </form>
-        // </>
-        <>
-        <Navbar></Navbar>
-        <h3>מצטערים דסי, אין לך מה לאשר</h3>
-        <h3>יש לתפוס קודם כל רכב או חניה</h3>
-        </>
-    )
+        <div className="end-travel-container">
+            <Navbar />
+            <br /><br />
+            {!paymentComplete ? (
+                <form className="input-container">
+                    <label>מספר כרטיס</label><br />
+                    <input type="number" required /><br />
+                    <label>תוקף</label><br />
+                    <input type="month" required /><br />
+                    <label>שלוש ספרות בגב כרטיס</label><br />
+                    <input type="number" required /><br /><br />
+                    <input
+                        style={{ backgroundColor: 'aqua' }}
+                        type="button"
+                        value="לתשלום סופי"
+                        onClick={handlePayment}
+                    />
+                </form>
+            ) : (
+                <h3>נתראה בנסיעה הבאה!</h3>
+            )}
+        </div>
+    );
 }

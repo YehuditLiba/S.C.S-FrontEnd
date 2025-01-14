@@ -74,9 +74,11 @@ function LogIn() {
           <MDBCol col='6' className="mb-5">
             <div className="d-flex flex-column justify-content-center gradient-custom-2 h-100 mb-4">
               <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                <p className="small mb-0" style={{ "text-align": "center" }}>
-                  אז מה זה בעצם shared-cars-service ואיך משתמשים בו?
-                  {/* המשך הטקסט ההסברתי */}
+                <div className="d-flex justify-content-center mb-3">
+                  <img src="https://img.icons8.com/ios/452/car.png" alt="Car Icon" style={{ width: '80px', height: '80px' }} />
+                </div>
+                <p className="small mb-0" style={{ "text-align": "center", fontSize: '1.1rem' }}>
+                  אז מה זה בעצם שירות רכב שיתופי ריווחי? זהו פתרון שמאפשר לך לשתף רכבים עם אחרים ולחסוך בהוצאות, תוך כדי שמירה על נוחות וזמינות. הצטרף אלינו היום ותחווה את העתיד של תחבורה שיתופית!
                 </p>
               </div>
             </div>
